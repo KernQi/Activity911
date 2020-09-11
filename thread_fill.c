@@ -48,7 +48,7 @@ int main(void) {
 		thread_inputs[i] = malloc(NUM_THREADS * sizeof(struct thread_fill_data));
   		thread_inputs[i]->thread_num = i;
 			thread_inputs[i]->start_location = data_array + (NUM_THREADS*i);
-			if(i = NUM_THREADS - 1){
+			if(i == NUM_THREADS - 1){
 				thread_inputs[i]->array_size = ceil(ARRAY_SIZE/NUM_THREADS);
 			}
 			else{
