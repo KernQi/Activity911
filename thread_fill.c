@@ -49,10 +49,10 @@ int main(void) {
   		thread_inputs[i]->thread_num = i;
 			thread_inputs[i]->start_location = data_array + (NUM_THREADS*i);
 			if(i == NUM_THREADS - 1){
-				thread_inputs[i]->array_size = ceil(ARRAY_SIZE/NUM_THREADS);
+				thread_inputs[i]->array_size = ceil(double(ARRAY_SIZE/NUM_THREADS));
 			}
 			else{
-				thread_inputs[i]->array_size = floor(ARRAY_SIZE/NUM_THREADS);
+				thread_inputs[i]->array_size = floor(double(ARRAY_SIZE/NUM_THREADS));
 
 			}
 
