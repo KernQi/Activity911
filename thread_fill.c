@@ -8,6 +8,9 @@
 struct thread_fill_data{
 	int thread_num;
 	//TODO: add fields to this struct to pass in thread's start location, array size, and fill value
+	float* start_location;
+	int array_size;
+	float fill_value;
 };
 
 void fillArray(float* arr, int size, float val){
@@ -21,11 +24,12 @@ void *threadMain(void * data) {
 	struct thread_fill_data* thread_input = (struct thread_fill_data*)data;
 	int thread_num = thread_input->thread_num;
 	//TODO: unpack the fields you added to the struct into local variables
-
     printf("Thread %d has started\n", thread_num);
-	
+	float* start_location = thread_input->start_location;
+	int array_size = thread_input -> array_size;
+	float fill_value = thread_input -> fill_value;
 	//TODO: call fillArray appropriately
-	fillArray(NULL, 0, 0.0);
+	fillArray(start_location, array_size, fill_value);
 
     printf("Thread %d has finished\n", thread_num);
 
@@ -35,18 +39,28 @@ void *threadMain(void * data) {
 int main(void) {
  	pthread_t threadIDs[NUM_THREADS];
 	struct thread_fill_data* thread_inputs[NUM_THREADS];
-	
+
 	//The threads are filling this array
 	float* data_array = malloc(ARRAY_SIZE * sizeof(float));
-	
+
 	//Initialize the thread inputs
 	for(int i=0; i < NUM_THREADS; i++){
 		thread_inputs[i] = malloc(NUM_THREADS * sizeof(struct thread_fill_data));
   		thread_inputs[i]->thread_num = i;
-		
-		//TODO: initialize the rest of the data in the thread_fill_data structs
+			thread_inputs[i]->start_location = data_array + (NUM_THREADS*i);
+			if(i = NUM_THREADS - 1){
+				thread_inputs[i]->array_size = ceil(ARRAY_SIZE/NUM_THREADS);
+			}
+			else{
+				thread_inputs[i]->array_size = floor(ARRAY_SIZE/NUM_THREADS);
+
+			}
+
+			thread_inputs[i]->fill_value = i;
+
+		//TODO: initialize the rest of the data in the thread_fill_data structs -
 	}
-	
+
 	//Launch all threads
 	printf("launching threads\n");
 	for(int i = 0; i < NUM_THREADS; i++) {
