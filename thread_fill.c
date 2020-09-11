@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<pthread.h>
+#include<math.h>
 
 #define NUM_THREADS 3
 #define ARRAY_SIZE 10
