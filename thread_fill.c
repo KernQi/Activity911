@@ -3,8 +3,8 @@
 #include<pthread.h>
 #include<math.h>
 
-#define NUM_THREADS 3
-#define ARRAY_SIZE 10
+#define NUM_THREADS 100
+#define ARRAY_SIZE 10000
 
 struct thread_fill_data{
 	int thread_num;
